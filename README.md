@@ -1,21 +1,48 @@
-# Starwars Application
+## create-react-app-light
 
-# myStarWarAp
+### If you are a begginer 
+You probably used create-react-app for your projects and had no idea which dependency doing what or got lost in scripts folder. How many time you've a encounter an error and had no idea where it came from and why ?
 
-React Redux application that uses SWAPI api and getting StarWars characters their homeworlds. 
+### If you are a master 
+How many time you tried to kick off a project and waisted a lot of time setting up lint ? babel ? jest config ? 
+or got stock with configuration errors? 
 
-https://swapi.co/ 
+### If you are a pro
+You probably own your nice boilerplate with your own tricks and style. But still, why won't you take a look and raise enhancements, PRS or issues ?
 
-Get chracters using the api pagination, destructure homeworld from a diffrent api call.
 
-Every time the user is clicking on the next page, there is a get request for the next 10 characters, 
-each character obj holds a homeplanet property that is url of a get request.
-Using saga, each call for the chunk of characters, there is initiation of a map that get the planet name from the api and 
-saves it.
+Instead of using the original create-react-app, this is a boilerplate to build a frontend app as tiny and basic as possible using react-redux.
 
-Used the following stack:
-- latest React
-- Redux
-- Saga
-- Webpack
-- React Router 
+#### Whats included?
+
+- webpack-dev-server
+- webpack 4
+- eslint configuration + prettier 
+- redux
+- redux-saga
+- sass
+- i18n (translation infra)
+- jest
+- babel
+- hot reload
+
+
+## Quick Use
+
+Run in locally - webpack-dev-server
+
+```
+yarn start
+```
+
+Run tests / test in dev mode (--watch)
+
+```
+yarn test
+```
+
+Fix eslint issues
+
+```
+yarn lint-fix
+```
