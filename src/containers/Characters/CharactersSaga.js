@@ -5,12 +5,11 @@ import {
   setCharactersData
 } from "containers/Characters/charactersConstants";
 
-export function* peopleDataSaga() {
-  let action = yield take(GET_CHARS_BY_URL);
+function* peopleDataSaga(action) {
   let data = yield call(get, action.payload);
   yield put(setCharactersData(data));
 }
 
-export default function* rootSaga() {
+export function* watchCharacters() {
   yield takeEvery(GET_CHARS_BY_URL, peopleDataSaga);
 }

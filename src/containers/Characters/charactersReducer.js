@@ -1,7 +1,11 @@
 import { SET_CHARS_DATA } from "./charactersConstants";
 
 const initialState = {
-  planetsMap: new Map()
+  planetsMap: new Map(),
+  currCharacters: [],
+  characterCount: 0,
+  nextCharacterRequest: null,
+  prevCharacterRequest: null
 };
 
 function reducer(state = initialState, action) {
@@ -11,7 +15,8 @@ function reducer(state = initialState, action) {
         ...state,
         currCharacters: [...action.payload.results],
         characterCount: action.payload.count,
-        nextCharacterRequest: action.payload.next
+        nextCharacterRequest: action.payload.next,
+        prevCharacterRequest: action.payload.previous
       };
     case "SET_PLANETS_MAP":
       return {

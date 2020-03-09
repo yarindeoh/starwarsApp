@@ -1,9 +1,11 @@
-import { fork } from 'redux-saga/effects';
+import { fork, all } from 'redux-saga/effects';
 
 import { initTranslationSaga } from 'services/i18n/translationSaga';
-import { peopleDataSaga } from 'containers/Characters/CharactersSaga'
+import { watchCharacters } from 'containers/Characters/charactersSaga'
 
 export default function* rootSaga() {
-    yield fork(initTranslationSaga);
-    yield fork(peopleDataSaga);
+ yield all([
+        fork(initTranslationSaga),
+        fork(watchCharacters)
+    ]);
 }

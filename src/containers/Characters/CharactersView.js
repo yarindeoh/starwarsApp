@@ -2,15 +2,14 @@ import React from "react";
 import { I18n } from "react-redux-i18n";
 
 import {
-  useCharacters,
-  useCharacterData
+  useCharacterData,
+  useGetPeople
 } from "containers/Characters/charactersHooks";
 import Table from "components/Table";
 
 const Characters = props => {
-  useCharacters("https://swapi.co/api/people");
-  const { data } = useCharacterData();
-  console.log(data);
+  const { data } = useCharacterData("https://swapi.co/api/people");
+  const { getPrev, getNext } = useGetPeople();
   return (
     <div className="app">
       {/* <div className="title">{I18n.t("app.title")}</div>
@@ -26,8 +25,30 @@ const Characters = props => {
             {
               Header: "Height",
               accessor: "height"
+            },
+            {
+              Header: "Hair Color",
+              accessor: "hair_color"
+            },
+            {
+              Header: "Eye Color",
+              accessor: "eye_color"
+            },
+            {
+              Header: "Birth Year",
+              accessor: "birth_year"
+            },
+            {
+              Header: "Gender",
+              accessor: "gender"
+            },
+            {
+              Header: "Planet",
+              accessor: "homeworld"
             }
           ]}
+          nextPage={getNext}
+          previousPage={getPrev}
         />
       )}
     </div>
