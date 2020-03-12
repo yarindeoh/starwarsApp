@@ -28,3 +28,16 @@ export const useGetPeople = () => {
     getPrev
   };
 };
+
+export const useSearch = () => {
+  const dispatch = useDispatch();
+  const getSearchResults = useCallback(
+    url => {
+      dispatch(getAllCharacters(url));
+    },
+    []
+  );
+  return {
+    getSearch: getSearchResults
+  };
+};

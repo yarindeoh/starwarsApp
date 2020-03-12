@@ -1,4 +1,4 @@
-import { take, select, put, all, takeEvery, call } from "redux-saga/effects";
+import { debounce, put, takeLatest, call } from "redux-saga/effects";
 import { get } from "services/restUtilsSaga";
 import {
   GET_CHARS_BY_URL,
@@ -11,5 +11,6 @@ function* peopleDataSaga(action) {
 }
 
 export function* watchCharacters() {
-  yield takeEvery(GET_CHARS_BY_URL, peopleDataSaga);
+  //When searching onevery key event, fire saga after 500 ms at batches
+  yield debounce(500, GET_CHARS_BY_URL, peopleDataSaga);
 }
