@@ -1,43 +1,46 @@
 import { useCallback, useEffect } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 
-import { getAllCharacters } from "containers/Characters/charactersConstants";
+import {
+  getAllCharacters,
+  getCharacterDetails
+} from "containers/Characters/charactersConstants";
 
 export const useCharacterData = url => {
   const dispatch = useDispatch();
+  console.log('hook');
   useEffect(() => {
     dispatch(getAllCharacters(url));
   }, [url]);
-  return {
-    data: useSelector(state => state.characters.currCharacters)
-  };
+  return useSelector(state => state.characters.currentCharacters);
 };
 
 export const useGetPeople = () => {
   const dispatch = useDispatch();
+  //TODO:: add reselect
   let nextPageUrl = useSelector(state => state.characters.nextCharacterRequest);
   let prevPageUrl = useSelector(state => state.characters.prevCharacterRequest);
-  const getNext = useCallback(() => {
-    dispatch(getAllCharacters(nextPageUrl));
-  }, [nextPageUrl]);
-  const getPrev = useCallback(() => {
-    dispatch(getAllCharacters(prevPageUrl));
-  }, [prevPageUrl]);
   return {
-    getNext,
-    getPrev
+    getNext: useCallback(() => {
+      dispatch(getAllCharacters(nextPageUrl));
+    }, [nextPageUrl]),
+    getPrev: useCallback(() => {
+      dispatch(getAllCharacters(prevPageUrl));
+    }, [prevPageUrl])
   };
 };
 
 export const useSearch = () => {
   const dispatch = useDispatch();
-  const getSearchResults = useCallback(
-    url => {
-      dispatch(getAllCharacters(url));
-    },
-    []
-  );
-  return {
-    getSearch: getSearchResults
-  };
+  return useCallback(url => {
+    dispatch(getAllCharacters(url));
+  }, []);
+};
+
+export const useCharacterDetails = id => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCharacterDetails(id));
+  }, [id]);
+  return useSelector(state => state.characters.currentCharacter);
 };

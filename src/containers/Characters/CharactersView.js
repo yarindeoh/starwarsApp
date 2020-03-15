@@ -9,10 +9,14 @@ import {
 import Pagination from "components/Pagination";
 
 const Characters = props => {
-  // Call getAllCharacters initialization 
-  const { data } = useCharacterData("https://swapi.co/api/people");
+  // Call getAllCharacters initialization
+  const data = useCharacterData("https://swapi.co/api/people");
   const { getPrev, getNext } = useGetPeople();
-  const { getSearch } = useSearch();
+  const getSearch = useSearch();
+  const changeLocation = characterRequest => {
+    let characterIdPrefix = characterRequest.split("/people")[1];
+    props.history.push(`/characterDetails${characterIdPrefix}`);
+  };
   return (
     <div className="app">
       {/* TODO: make it a component */}
@@ -34,9 +38,9 @@ const Characters = props => {
             <div
               key={`${character.name}${index}`}
               item-value={character.url}
-              onClick={event =>
-                console.log(event.target.getAttribute("item-value"))
-              }
+              onClick={event => {
+                changeLocation(event.target.getAttribute("item-value"));
+              }}
             >
               {character.name}
             </div>

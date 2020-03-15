@@ -1,10 +1,11 @@
-import { SET_CHARS_DATA } from "./charactersConstants";
+import { SET_CHARS_DATA, SET_CHARACTER_DETAILS } from "./charactersConstants";
 
 const initialState = {
-  currCharacters: [],
+  currentCharacters: [],
   characterCount: 0,
   nextCharacterRequest: null,
-  prevCharacterRequest: null
+  prevCharacterRequest: null,
+  currentCharacter: {}
 };
 
 function reducer(state = initialState, action) {
@@ -12,10 +13,15 @@ function reducer(state = initialState, action) {
     case SET_CHARS_DATA:
       return {
         ...state,
-        currCharacters: [...action.payload.results],
+        currentCharacters: [...action.payload.results],
         characterCount: action.payload.count,
         nextCharacterRequest: action.payload.next,
         prevCharacterRequest: action.payload.previous
+      };
+    case SET_CHARACTER_DETAILS:
+      return {
+        ...state,
+        currentCharacter: { ...action.payload }
       };
     default:
       return state;
