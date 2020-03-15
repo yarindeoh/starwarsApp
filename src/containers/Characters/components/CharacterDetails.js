@@ -10,7 +10,17 @@ const CharacterDetails = props => {
       <h3>Character Details</h3>
       {characterData &&
         Object.keys(characterData).map((key, index) => {
-          return (
+          console.log(characterData[key]);
+          return Array.isArray(characterData[key]) ? (
+            <div>
+              {key} :
+              <ol>
+                {characterData[key].map(item => (
+                  <li key={`${key}${index}`}>{item}</li>
+                ))}
+              </ol>
+            </div>
+          ) : (
             <div key={`${key}${index}`}>
               {key} : {characterData[key]}
             </div>
