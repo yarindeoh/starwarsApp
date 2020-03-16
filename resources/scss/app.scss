@@ -7,7 +7,7 @@
 }
 
 .logoImage {
-    width: 500px;
+    width: 350px;
     margin: 10px;
 }
 
@@ -20,17 +20,8 @@
     color: $mainColor;
 }
 
-.react-bs-table-bordered {
-    color: $mainColor;
-}
-
 h1, h2, h3 {
     text-align: center;
-}
-
-.table-hover>tbody>tr:hover {
-    background-color: $hoverColor;
-    transform: scale(1);
 }
 
 .react-spinner {

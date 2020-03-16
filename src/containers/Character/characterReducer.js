@@ -1,7 +1,11 @@
 import { SET_CHARACTER_DETAILS } from "./characterConstants";
 
 const initialState = {
-  currentCharacter: {}
+  currentCharacter: {},
+  planet: new Map(),
+  films: new Map(),
+  vehicles: new Map(),
+  starships: new Map()
 };
 
 function reducer(state = initialState, action) {

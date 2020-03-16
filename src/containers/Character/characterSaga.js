@@ -1,9 +1,4 @@
-import {
-  put,
-  all,
-  takeEvery,
-  call
-} from "redux-saga/effects";
+import { put, all, takeEvery, call, select } from "redux-saga/effects";
 import { get } from "services/restUtilsSaga";
 import {
   GET_CHARACTER_DETAILS,
@@ -17,7 +12,10 @@ function* handleAsyncParam(httpRequest, key = "") {
 
 function* handleAsyncArrParam(requestsArr) {
   const promises = [];
-  requestsArr.forEach(function(value, key) {
+  requestsArr.forEach(value => {
+    //check if map has reqArr's value - if so, push value to res value
+    // else push it to promises arr
+    
     promises.push(call(get, value));
   });
   const values = yield all(promises);
@@ -41,8 +39,7 @@ function* characterDetailsHandler(action) {
     skin_color,
     eye_color,
     birth_year,
-    gender,
-    starships
+    gender
   } = data;
   const processedData = {
     name,
@@ -52,11 +49,11 @@ function* characterDetailsHandler(action) {
     skin_color,
     eye_color,
     birth_year,
-    gender,
-    starships
+    gender
   };
   //TODO:: add url swapi validation and make it generic!
   processedData.homeworld = yield handleAsyncParam(data.homeworld, "name");
+  let filmsMap = yield select();
   processedData.films = getObjParamFromArr(
     yield handleAsyncArrParam(data.films),
     "title"

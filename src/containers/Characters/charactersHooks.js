@@ -2,7 +2,6 @@ import { useCallback, useEffect } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 
 import { getAllCharacters } from "containers/Characters/charactersConstants";
-import { getCharacterDetails } from "containers/Character/characterConstants";
 
 export const useCharacterData = url => {
   const dispatch = useDispatch();
