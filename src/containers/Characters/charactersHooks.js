@@ -1,14 +1,11 @@
 import { useCallback, useEffect } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 
-import {
-  getAllCharacters,
-  getCharacterDetails
-} from "containers/Characters/charactersConstants";
+import { getAllCharacters } from "containers/Characters/charactersConstants";
+import { getCharacterDetails } from "containers/Character/characterConstants";
 
 export const useCharacterData = url => {
   const dispatch = useDispatch();
-  console.log('hook');
   useEffect(() => {
     dispatch(getAllCharacters(url));
   }, [url]);
@@ -37,10 +34,3 @@ export const useSearch = () => {
   }, []);
 };
 
-export const useCharacterDetails = id => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getCharacterDetails(id));
-  }, [id]);
-  return useSelector(state => state.characters.currentCharacter);
-};

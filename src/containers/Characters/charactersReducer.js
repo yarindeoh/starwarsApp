@@ -4,8 +4,7 @@ const initialState = {
   currentCharacters: [],
   characterCount: 0,
   nextCharacterRequest: null,
-  prevCharacterRequest: null,
-  currentCharacter: {}
+  prevCharacterRequest: null
 };
 
 function reducer(state = initialState, action) {
@@ -17,11 +16,6 @@ function reducer(state = initialState, action) {
         characterCount: action.payload.count,
         nextCharacterRequest: action.payload.next,
         prevCharacterRequest: action.payload.previous
-      };
-    case SET_CHARACTER_DETAILS:
-      return {
-        ...state,
-        currentCharacter: { ...action.payload }
       };
     default:
       return state;

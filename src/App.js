@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 
 import Characters from "containers/Characters/CharactersView";
-import CharacterDetails from "containers/Characters/components/CharacterDetails";
+import CharacterView from "containers/Character/CharacterView";
 import starwars from "resources/images/starwars-logo.png";
 import "resources/scss/style.scss";
 
@@ -17,7 +17,7 @@ export const App = withRouter(() => {
         <Route
           path="/characterDetails/:characterId"
           exact={true}
-          component={CharacterDetails}
+          component={CharacterView}
         />
       </Switch>
     </div>

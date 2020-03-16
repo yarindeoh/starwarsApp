@@ -1,8 +1,8 @@
 import React from "react";
 
-import { useCharacterDetails } from "containers/Characters/charactersHooks";
+import { useCharacterDetails } from "containers/Character/characterHooks";
 
-const CharacterDetails = props => {
+const CharacterView = props => {
   const characterData = useCharacterDetails(props.match.params.characterId);
   console.log(characterData);
   return (
@@ -12,11 +12,11 @@ const CharacterDetails = props => {
         Object.keys(characterData).map((key, index) => {
           console.log(characterData[key]);
           return Array.isArray(characterData[key]) ? (
-            <div>
+            <div key={`${key}${index}`}>
               {key} :
               <ol>
-                {characterData[key].map(item => (
-                  <li key={`${key}${index}`}>{item}</li>
+                {characterData[key].map((item, innerIndex) => (
+                  <li key={`${item}${innerIndex}`}>{item}</li>
                 ))}
               </ol>
             </div>
@@ -30,4 +30,4 @@ const CharacterDetails = props => {
   );
 };
 
-export default CharacterDetails;
+export default CharacterView;
