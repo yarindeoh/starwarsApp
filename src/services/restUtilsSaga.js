@@ -26,8 +26,7 @@ export function* handleRequest(url, type, options = {}, data = {}) {
     return serverData;
   } catch (e) {
     // TODO:: handle errors
-    console.error(e);
-    return yield Promise.reject(json);
+    return yield Promise.reject(e);
   }
 }
 
