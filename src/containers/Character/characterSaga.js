@@ -8,6 +8,12 @@ import {
     setStarships,
     setSpecies
 } from 'containers/Character/characterConstants';
+import {
+    getFilms,
+    getSpecies,
+    getStarships,
+    getVehicles
+} from 'containers/Character/characterSelectors';
 
 function* handleAsyncParam(httpRequest, key = '') {
     let result = yield call(get, httpRequest);
@@ -25,33 +31,20 @@ function* handleAsyncArrParam(
     requestsArr,
     selector,
     property,
-    dispatchMapChange
+    mapChangeAction
 ) {
     const promises = [];
-    const mapValues = [];
     const requestsMap = yield select(selector);
     requestsArr.map((req) => {
-        //check if map has reqArr's value - if so, push value to res value
-        // else push it to promises arr
-        if (requestsMap.has(req)) {
-            var reqValue = requestsMap.get(req);
-            mapValues.push(reqValue);
-        } else {
+        if (!requestsMap.has(req)) {
             promises.push(call(get, req));
         }
     });
     const values = yield all(promises);
     const deltaMap = convertArrObjToMap(values, property);
     const mergedMap = new Map([...deltaMap].concat([...requestsMap]));
-    yield dispatchMapChange(mergedMap);
-    //TODO:: refactor this line
-    return [...getObjParamFromArr(values, property), ...mapValues];
-}
-
-function getObjParamFromArr(arrObj, property) {
-    return arrObj.map((item) => {
-        return item[property];
-    });
+    yield put(mapChangeAction(mergedMap));
+    return mergedMap;
 }
 
 function* characterDetailsHandler(action) {
@@ -77,43 +70,34 @@ function* characterDetailsHandler(action) {
         birth_year,
         gender
     };
+    yield put(setCharacterDetails(processedData));
     //TODO:: add url swapi validation and make it generic!
     //TODO:: cache planets also!
     // let planetMap = yield select((state) => state.static.planets);
     processedData.homeworld = yield handleAsyncParam(data.homeworld, 'name');
-    //add reselect
-    //TODO:: generic func to all with selectors
     processedData.films = yield handleAsyncArrParam(
         data.films,
-        (state) => state.static.films,
+        getFilms,
         'title',
-        function* cb(newMap) {
-            yield put(setFilms(newMap));
-        }
+        setFilms
     );
     processedData.vehicles = yield handleAsyncArrParam(
         data.vehicles,
-        (state) => state.static.vehicles,
+        getVehicles,
         'name',
-        function* cb(newMap) {
-            yield put(setVehicles(newMap));
-        }
+        setVehicles
     );
     processedData.starships = yield handleAsyncArrParam(
         data.starships,
-        (state) => state.static.starships,
+        getStarships,
         'name',
-        function* cb(newMap) {
-            yield put(setStarships(newMap));
-        }
+        setStarships
     );
     processedData.species = yield handleAsyncArrParam(
         data.species,
-        (state) => state.static.species,
+        getSpecies,
         'name',
-        function* cb(newMap) {
-            yield put(setSpecies(newMap));
-        }
+        setSpecies
     );
     yield put(setCharacterDetails(processedData));
 }

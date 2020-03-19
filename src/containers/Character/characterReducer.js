@@ -15,7 +15,10 @@ export function characterReducer(state = initialCharacterState, action) {
         case SET_CHARACTER_DETAILS:
             return {
                 ...state,
-                currentCharacter: { ...action.payload }
+                currentCharacter: {
+                    ...state.currentCharacter,
+                    ...action.payload
+                }
             };
         default:
             return state;
