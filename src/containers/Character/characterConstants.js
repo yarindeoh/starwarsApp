@@ -1,5 +1,7 @@
 export const GET_CHARACTER_DETAILS = 'Characters/GET_CHARACTER_DETAILS';
 export const SET_CHARACTER_DETAILS = 'Characters/SET_CHARACTER_DETAILS';
+export const SET_CHARACTER_STATIC_DETAILS =
+    'Characters/SET_CHARACTER_STATIC_DETAILS';
 export const SET_FILMS = 'Static/SET_FILMS';
 export const SET_VEHICLES = 'Static/SET_VEHICLES';
 export const SET_SPECIES = 'Static/SET_SPECIES';
@@ -12,6 +14,11 @@ export const getCharacterDetails = (id) => ({
 
 export const setCharacterDetails = (payload) => ({
     type: SET_CHARACTER_DETAILS,
+    payload
+});
+
+export const setCharacterStaticDetails = (payload) => ({
+    type: SET_CHARACTER_STATIC_DETAILS,
     payload
 });
 
@@ -34,4 +41,3 @@ export const setStarships = (payload) => ({
     type: SET_STARSHIPS,
     payload
 });
-

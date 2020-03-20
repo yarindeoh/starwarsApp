@@ -1,5 +1,6 @@
 import {
     SET_CHARACTER_DETAILS,
+    SET_CHARACTER_STATIC_DETAILS,
     SET_FILMS,
     SET_SPECIES,
     SET_STARSHIPS,
@@ -16,10 +17,18 @@ export function characterReducer(state = initialCharacterState, action) {
             return {
                 ...state,
                 currentCharacter: {
+                    ...action.payload
+                }
+            };
+        case SET_CHARACTER_STATIC_DETAILS: {
+            return {
+                ...state,
+                currentCharacter: {
                     ...state.currentCharacter,
                     ...action.payload
                 }
             };
+        }
         default:
             return state;
     }

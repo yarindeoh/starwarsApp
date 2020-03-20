@@ -5,6 +5,8 @@
 /node-install
 .idea/
 **/.idea/
+.vscode/
+**/.vscode
 
 # production
 /dist
