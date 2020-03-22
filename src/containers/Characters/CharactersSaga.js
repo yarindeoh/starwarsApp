@@ -13,4 +13,5 @@ function* charactersDataHandler(action) {
 export function* watchCharacters() {
     //When searching onevery key event, fire saga after 500 ms at batches
     yield debounce(500, GET_CHARS_BY_URL, charactersDataHandler);
+    // yield takeEvery(GET_CHARS_BY_URL, charactersDataHandler);
 }

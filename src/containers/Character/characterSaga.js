@@ -104,7 +104,7 @@ function* characterDetailsHandler(action) {
     //TODO:: add url swapi validation and make it generic!
     //TODO:: cache planets also!
     // let planetMap = yield select((state) => state.static.planets);
-    yield put(setCharacterDetails(processedData));
+    // yield put(setCharacterDetails(processedData));
     processedData.homeworld = yield handleAsyncParam(data.homeworld, 'name');
     processedData.films = yield handleAsyncArrParam(
         data.films,

@@ -25,11 +25,19 @@ const store = createStore(
 sagaMiddleware.run(rootSaga);
 syncTranslationWithStore(store);
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
             <App />
         </ConnectedRouter>
-    </Provider>,
-    document.getElementById('root')
+    </Provider>
 );
+
+// ReactDOM.render(
+//     <Provider store={store}>
+//         <ConnectedRouter history={history}>
+//             <App />
+//         </ConnectedRouter>
+//     </Provider>,
+//     document.getElementById('root')
+// );
