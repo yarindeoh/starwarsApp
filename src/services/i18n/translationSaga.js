@@ -1,6 +1,6 @@
 import { put } from 'redux-saga/effects';
 import languagesData from 'services/i18n/languages.json';
-import { LANG } from 'src/appConstants';
+import { LANG } from 'services/general/generalConstants';
 
 export function* initTranslationSaga() {
     yield put({

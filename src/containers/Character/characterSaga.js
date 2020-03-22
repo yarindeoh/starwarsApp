@@ -9,6 +9,7 @@ import {
     setStarships,
     setSpecies
 } from 'containers/Character/characterConstants';
+import { convertArrObjToMap } from 'services/general/generalHelpers';
 import {
     getFilms,
     getSpecies,
@@ -21,20 +22,18 @@ function* handleAsyncParam(httpRequest, key = '') {
     return key ? result[key] : result;
 }
 
-function convertArrObjToMap(arr, property) {
-    const keyValueArr = arr.map((item) => {
-        return [item.url, item[property]];
-    });
-    return new Map(keyValueArr);
-}
-
 /**
- * 
- * @param {*} values 
- * @param {*} mapChangeAction 
- * @param {*} property 
+ *
+ * @param {*} values
+ * @param {*} mapChangeAction
+ * @param {*} property
  */
-function* updateStoreOfNewStaticValues(values, mapChangeAction, property) {
+function* updateStoreOfNewStaticValues(
+    values,
+    mapChangeAction,
+    property,
+    storeMap
+) {
     // contains all new map values that are not in the store
     const deltaMap = convertArrObjToMap(values, property);
     const mergedMap = new Map([...deltaMap].concat([...storeMap]));
@@ -49,7 +48,12 @@ function* updateStoreOfNewStaticValues(values, mapChangeAction, property) {
  * @param {selector of static field e.g vehicls, species etc..} selector
  * @param {callback of changing static field values} mapChangeAction
  */
-function* handleAsyncArrParam(requestsArr, selector, mapChangeAction) {
+function* handleAsyncArrParam(
+    requestsArr,
+    selector,
+    property,
+    mapChangeAction
+) {
     const promises = [];
     const storeMap = yield select(selector);
     const requestsMap = new Map();
@@ -64,10 +68,11 @@ function* handleAsyncArrParam(requestsArr, selector, mapChangeAction) {
         }
     });
     const values = yield all(promises);
-    const deltaMap = updateStoreOfNewStaticValues(
+    const deltaMap = yield updateStoreOfNewStaticValues(
         values,
         mapChangeAction,
-        property
+        property,
+        storeMap
     );
     // send back new map values and store's values
     return new Map([...requestsMap].concat([...deltaMap]));
