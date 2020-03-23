@@ -7,26 +7,17 @@ import {
     SET_VEHICLES
 } from './characterConstants';
 
-const initialCharacterState = {
-    currentCharacter: {}
-};
-
-export function characterReducer(state = initialCharacterState, action) {
+export function characterReducer(state = {}, action) {
     switch (action.type) {
         case SET_CHARACTER_DETAILS:
             return {
                 ...state,
-                currentCharacter: {
-                    ...action.payload
-                }
+                data: { ...action.payload }
             };
         case SET_CHARACTER_STATIC_DETAILS: {
             return {
                 ...state,
-                currentCharacter: {
-                    ...state.currentCharacter,
-                    ...action.payload
-                }
+                staticData: { ...action.payload }
             };
         }
         default:

@@ -3,7 +3,10 @@ import React from 'react';
 import { useCharacterDetails } from 'containers/Character/characterHooks';
 
 const CharacterView = (props) => {
-    const characterData = useCharacterDetails(props.match.params.characterId);
+    const { characterData, characterStaticData } = useCharacterDetails(
+        props.match.params.characterId
+    );
+    console.log(characterStaticData);
     return (
         <div>
             <h3>Character Details</h3>
@@ -21,6 +24,27 @@ const CharacterView = (props) => {
                     ) : (
                         <div key={`${key}${index}`}>
                             {key} : {characterData[key]}
+                        </div>
+                    );
+                })}
+            {characterStaticData &&
+                Object.keys(characterStaticData).map((key, index) => {
+                    return Array.isArray(characterStaticData[key]) ? (
+                        <div key={`${key}${index}`}>
+                            {key} :
+                            <ol>
+                                {characterStaticData[key].map(
+                                    (item, innerIndex) => (
+                                        <li key={`${item}${innerIndex}`}>
+                                            {item}
+                                        </li>
+                                    )
+                                )}
+                            </ol>
+                        </div>
+                    ) : (
+                        <div key={`${key}${index}`}>
+                            {key} : {characterStaticData[key]}
                         </div>
                     );
                 })}

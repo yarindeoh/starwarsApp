@@ -1,16 +1,12 @@
 import { createSelector } from 'reselect';
 
-export const getFilms = (state) => state.static.films;
-export const getVehicles = (state) => state.static.vehicles;
-export const getStarships = (state) => state.static.starships;
-export const getSpecies = (state) => state.static.species;
-
-export const getCharacter = (state) => state.character.currentCharacter;
+export const getCharacterData = (state) => state.character.data;
+export const getCharacterStaticData = (state) => state.character.staticData;
 export const getCurrCharacterFilms = (state) =>
     state &&
     state.character &&
-    state.character.currentCharacter &&
-    state.character.currentCharacter.films;
+    state.character.staticData &&
+    state.character.staticData.films;
 export const getCurrCharacterFilmsArr = createSelector(
     getCurrCharacterFilms,
     (filmsMap) => {
@@ -20,8 +16,8 @@ export const getCurrCharacterFilmsArr = createSelector(
 export const getCurrCharacterSpecies = (state) =>
     state &&
     state.character &&
-    state.character.currentCharacter &&
-    state.character.currentCharacter.species;
+    state.character.staticData &&
+    state.character.staticData.species;
 export const getCurrCharacterSpeciesArr = createSelector(
     getCurrCharacterSpecies,
     (speciesMap) => {
@@ -31,8 +27,8 @@ export const getCurrCharacterSpeciesArr = createSelector(
 export const getCurrCharacterStarships = (state) =>
     state &&
     state.character &&
-    state.character.currentCharacter &&
-    state.character.currentCharacter.starships;
+    state.character.staticData &&
+    state.character.staticData.starships;
 export const getCurrCharacterStarshipsArr = createSelector(
     getCurrCharacterStarships,
     (starshipsMap) => {
@@ -42,23 +38,22 @@ export const getCurrCharacterStarshipsArr = createSelector(
 export const getCurrCharacterVehicles = (state) =>
     state &&
     state.character &&
-    state.character.currentCharacter &&
-    state.character.currentCharacter.vehicles;
+    state.character.staticData &&
+    state.character.staticData.vehicles;
 export const getCurrCharacterVehiclesArr = createSelector(
     getCurrCharacterVehicles,
     (vehiclesMap) => {
         return vehiclesMap && vehiclesMap && Array.from(vehiclesMap.values());
     }
 );
-export const getCurrentCharacter = createSelector(
-    getCharacter,
+
+export const getCurrentCharacterStaticData = createSelector(
     getCurrCharacterFilmsArr,
     getCurrCharacterSpeciesArr,
     getCurrCharacterStarshipsArr,
     getCurrCharacterVehiclesArr,
-    (character, films, species, starships, vehicles) => {
+    (films, species, starships, vehicles) => {
         return {
-            ...character,
             films,
             species,
             starships,
@@ -66,3 +61,18 @@ export const getCurrentCharacter = createSelector(
         };
     }
 );
+
+//TODO:: move
+///STATIC
+
+export const getFilms = (state) => state.static.films;
+export const getVehicles = (state) => state.static.vehicles;
+export const getStarships = (state) => state.static.starships;
+export const getSpecies = (state) => state.static.species;
+
+export const staticSelectors = {
+    species: getSpecies,
+    vehicles: getVehicles,
+    starships: getStarships,
+    films: getFilms
+};

@@ -22,6 +22,9 @@ export const setCharacterStaticDetails = (payload) => ({
     payload
 });
 
+//TODO:: move
+//// STATIC
+
 export const setFilms = (payload) => ({
     type: SET_FILMS,
     payload
@@ -41,3 +44,17 @@ export const setStarships = (payload) => ({
     type: SET_STARSHIPS,
     payload
 });
+
+export const staticProperties = {
+    species: 'name',
+    vehicles: 'name',
+    starships: 'name',
+    films: 'title'
+};
+
+export const staticActions = {
+    species: setSpecies,
+    vehicles: setVehicles,
+    starships: setStarships,
+    films: setFilms
+};

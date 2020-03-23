@@ -7,19 +7,39 @@ import {
     setFilms,
     setVehicles,
     setStarships,
-    setSpecies
+    setSpecies,
+    staticActions,
+    staticProperties
 } from 'containers/Character/characterConstants';
-import { convertArrObjToMap } from 'services/general/generalHelpers';
+import {
+    convertArrObjToMap,
+    validateURLRequest
+} from 'services/general/generalHelpers';
 import {
     getFilms,
     getSpecies,
     getStarships,
-    getVehicles
+    getVehicles,
+    staticSelectors
 } from 'containers/Character/characterSelectors';
 
 function* handleAsyncParam(httpRequest, key = '') {
     let result = yield call(get, httpRequest);
     return key ? result[key] : result;
+}
+
+function* handleAsyncData(data) {
+    let processedObj = {};
+    for (let key in data) {
+        processedObj[key] = yield handleAsyncArrParam(
+            data[key],
+            staticSelectors[key],
+            staticProperties[key],
+            staticActions[key],
+            setFilms
+        );
+    }
+    return processedObj;
 }
 
 /**
@@ -91,46 +111,61 @@ function* characterDetailsHandler(action) {
         birth_year,
         gender
     } = data;
-    const processedData = {
-        name,
-        height,
-        mass,
-        hair_color,
-        skin_color,
-        eye_color,
-        birth_year,
-        gender
-    };
+    // const processedData = {
+    //     name,
+    //     height,
+    //     mass,
+    //     hair_color,
+    //     skin_color,
+    //     eye_color,
+    //     birth_year,
+    //     gender
+    // };
+    let primativeData = {};
+    let p = {};
+    Object.keys(data).map((key) => {
+        let item = data[key];
+        if (Array.isArray(item) && validateURLRequest(item[0])) {
+            p[key] = item;
+            // } else if(validateURLRequest(item)){}
+        } else {
+            primativeData[key] = item;
+        }
+    });
     //TODO:: add url swapi validation and make it generic!
     //TODO:: cache planets also!
     // let planetMap = yield select((state) => state.static.planets);
-    yield put(setCharacterDetails(processedData));
-    processedData.homeworld = yield handleAsyncParam(data.homeworld, 'name');
-    processedData.films = yield handleAsyncArrParam(
-        data.films,
-        getFilms,
-        'title',
-        setFilms
-    );
-    processedData.vehicles = yield handleAsyncArrParam(
-        data.vehicles,
-        getVehicles,
-        'name',
-        setVehicles
-    );
-    processedData.starships = yield handleAsyncArrParam(
-        data.starships,
-        getStarships,
-        'name',
-        setStarships
-    );
-    processedData.species = yield handleAsyncArrParam(
-        data.species,
-        getSpecies,
-        'name',
-        setSpecies
-    );
-    yield put(setCharacterDetails(processedData));
+    // processedData.homeworld = yield handleAsyncParam(data.homeworld, 'name');
+
+    yield put(setCharacterDetails(primativeData));
+    let processedData = yield handleAsyncData(p);
+    yield put(setCharacterStaticDetails(processedData));
+
+    // processedData.films = yield handleAsyncArrParam(
+    //     data.films,
+    //     getFilms,
+    //     'title',
+    //     setFilms
+    // );
+    // processedData.vehicles = yield handleAsyncArrParam(
+    //     data.vehicles,
+    //     getVehicles,
+    //     'name',
+    //     setVehicles
+    // );
+    // processedData.starships = yield handleAsyncArrParam(
+    //     data.starships,
+    //     getStarships,
+    //     'name',
+    //     setStarships
+    // );
+    // processedData.species = yield handleAsyncArrParam(
+    //     data.species,
+    //     getSpecies,
+    //     'name',
+    //     setSpecies
+    // );
+    // yield put(setCharacterDetails(processedData));
 }
 
 export function* watchCharacter() {
