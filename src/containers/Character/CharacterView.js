@@ -1,55 +1,16 @@
 import React from 'react';
 
-import { useCharacterDetails } from 'containers/Character/characterHooks';
+import CharacterLists from 'containers/Character/components/CharacterLists';
+import CharacterPrimitive from 'containers/Character/components/CharacterPrimitive';
 
-const CharacterView = (props) => {
-    const { characterData, characterStaticData } = useCharacterDetails(
-        props.match.params.characterId
-    );
-    console.log(characterStaticData);
+const CharacterView = React.memo((props) => {
     return (
-        <div>
+        <div className="characterDetails">
             <h3>Character Details</h3>
-            {characterData &&
-                Object.keys(characterData).map((key, index) => {
-                    return Array.isArray(characterData[key]) ? (
-                        <div key={`${key}${index}`}>
-                            {key} :
-                            <ol>
-                                {characterData[key].map((item, innerIndex) => (
-                                    <li key={`${item}${innerIndex}`}>{item}</li>
-                                ))}
-                            </ol>
-                        </div>
-                    ) : (
-                        <div key={`${key}${index}`}>
-                            {key} : {characterData[key]}
-                        </div>
-                    );
-                })}
-            {characterStaticData &&
-                Object.keys(characterStaticData).map((key, index) => {
-                    return Array.isArray(characterStaticData[key]) ? (
-                        <div key={`${key}${index}`}>
-                            {key} :
-                            <ol>
-                                {characterStaticData[key].map(
-                                    (item, innerIndex) => (
-                                        <li key={`${item}${innerIndex}`}>
-                                            {item}
-                                        </li>
-                                    )
-                                )}
-                            </ol>
-                        </div>
-                    ) : (
-                        <div key={`${key}${index}`}>
-                            {key} : {characterStaticData[key]}
-                        </div>
-                    );
-                })}
+            <CharacterPrimitive id={props.match.params.characterId} />
+            <CharacterLists />
         </div>
     );
-};
+});
 
 export default CharacterView;

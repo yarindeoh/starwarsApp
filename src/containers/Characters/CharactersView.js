@@ -7,10 +7,10 @@ import {
     useSearch
 } from 'containers/Characters/charactersHooks';
 import Pagination from 'components/Pagination';
+import CharacterRow from 'containers/Characters/components/CharacterRow';
 
 const Characters = (props) => {
-    // Call getAllCharacters initialization
-    const data = useCharacterData('https://swapi.co/api/people');
+    const data = useCharacterData();
     const { getPrev, getNext } = useGetPeople();
     const getSearch = useSearch();
     const changeLocation = (characterRequest) => {
@@ -19,36 +19,15 @@ const Characters = (props) => {
     };
     return (
         <div className="app">
-            {/* TODO: make it a component */}
-            {/* TODO:: think about useEffect */}
             <div>
                 Search
                 <input
                     onChange={(event) => {
-                        //TODO:: make url dynamic in hooks
-                        getSearch(
-                            `https://swapi.co/api/people/?search=${event.target.value}`
-                        );
+                        getSearch(event.target.value);
                     }}
                 />
             </div>
-            {data &&
-                data.map((character, index) => {
-                    return (
-                        //TODO:: make it a component
-                        <div
-                            key={`${character.name}${index}`}
-                            item-value={character.url}
-                            onClick={(event) => {
-                                changeLocation(
-                                    event.target.getAttribute('item-value')
-                                );
-                            }}
-                        >
-                            {character.name}
-                        </div>
-                    );
-                })}
+            <CharacterRow data={data} changeLocation={changeLocation} />
             <Pagination nextPage={getNext} previousPage={getPrev} />
         </div>
     );

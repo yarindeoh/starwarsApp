@@ -13,7 +13,12 @@ export const useCharacterDetails = (id) => {
         dispatch(getCharacterDetails(id));
     }, [id]);
     return {
-        characterData: useSelector(getCharacterData, shallowEqual),
+        characterData: useSelector(getCharacterData, shallowEqual)
+    };
+};
+
+export const useCharacterComplexDetails = () => {
+    return {
         characterStaticData: useSelector(
             getCurrentCharacterStaticData,
             shallowEqual

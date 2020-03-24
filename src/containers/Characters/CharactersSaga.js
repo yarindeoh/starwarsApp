@@ -1,12 +1,14 @@
-import { debounce, put, takeEvery, call } from 'redux-saga/effects';
+import { debounce, put, call } from 'redux-saga/effects';
 import { get } from 'services/restUtilsSaga';
 import {
     GET_CHARS_BY_URL,
     setCharactersData
 } from 'containers/Characters/charactersConstants';
+import Api from 'containers/Characters/charactersApi';
 
 function* charactersDataHandler(action) {
-    let data = yield call(get, action.payload);
+    const { payload } = action;
+    let data = yield call(Api.getAllCharacters, payload);
     yield put(setCharactersData(data));
 }
 

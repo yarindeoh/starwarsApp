@@ -6,6 +6,8 @@ export const SET_FILMS = 'Static/SET_FILMS';
 export const SET_VEHICLES = 'Static/SET_VEHICLES';
 export const SET_SPECIES = 'Static/SET_SPECIES';
 export const SET_STARSHIPS = 'Static/SET_STARSHIPS';
+//TODO:: dynamic to api_prefix
+export const HANDLE_ASYNC_DATA = 'HANDLE_ASYNC_DATA';
 
 export const getCharacterDetails = (id) => ({
     type: GET_CHARACTER_DETAILS,
@@ -19,6 +21,12 @@ export const setCharacterDetails = (payload) => ({
 
 export const setCharacterStaticDetails = (payload) => ({
     type: SET_CHARACTER_STATIC_DETAILS,
+    payload
+});
+
+//TODO:: dynamic to api_prefix
+export const handleAsyncDataAction = (payload) => ({
+    type: HANDLE_ASYNC_DATA,
     payload
 });
 
@@ -58,3 +66,5 @@ export const staticActions = {
     starships: setStarships,
     films: setFilms
 };
+
+
