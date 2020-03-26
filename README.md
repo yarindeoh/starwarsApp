@@ -46,3 +46,23 @@ Fix eslint issues
 ```
 yarn lint-fix
 ```
+
+#### swapi api sagas middleware
+Since the structure of SWAPI api returns a pattern of key value pairs that containts
+either a primitive string as a value or a list of https requests, apiSaga is a generic way
+to hanfle this async pattern.
+
+// maps in the store
+
+- An http response is being received in a container saga e.g characterSagas, an is being send to 
+a middleware with a container prefix in order to be proccesed and filtered to a primitive response and 
+an asyn response.
+
+- A primitive response is dispatched with the recieved prefix.
+- An async response is dispatched with the recieved prefix.
+- Container saga is catching the action and sending required fields for this async response, 
+the contianer configurations: store selectors, properties to extract and store related actions for updating. 
+
+- Api saga is proccesing store maps values and excecuting non existing http requests, in the end, 
+fires a fulfilled fetching action which is being consumed in container's view.
+

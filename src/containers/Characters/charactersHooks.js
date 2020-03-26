@@ -8,17 +8,16 @@ import {
     getPrevCharactersRequest
 } from 'containers/Characters/charactersSelectors';
 
-export const useCharacterData = (url) => {
+export const useCharacterData = () => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getAllCharacters(url));
-    }, [url]);
+        dispatch(getAllCharacters(''));
+    }, []);
     return useSelector(getCurrentCharacters, shallowEqual);
 };
 
 export const useGetPeople = () => {
     const dispatch = useDispatch();
-    //TODO:: add reselect
     let nextPageUrl = useSelector(getNextCharactersRequest, shallowEqual);
     let prevPageUrl = useSelector(getPrevCharactersRequest, shallowEqual);
     return {
@@ -33,7 +32,7 @@ export const useGetPeople = () => {
 
 export const useSearch = () => {
     const dispatch = useDispatch();
-    return useCallback((url) => {
-        dispatch(getAllCharacters(url));
+    return useCallback((pageNumber) => {
+        dispatch(getAllCharacters(pageNumber));
     }, []);
 };
