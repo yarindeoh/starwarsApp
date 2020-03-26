@@ -2,11 +2,9 @@ import { combineReducers } from 'redux';
 import { i18nReducer } from 'react-redux-i18n';
 import { connectRouter } from 'connected-react-router';
 
+import characterReducer from 'containers/Character/characterReducer';
 import charactersReducer from 'containers/Characters/charactersReducer';
-import {
-    characterReducer,
-    staticReducer
-} from 'containers/Character/characterReducer';
+import staticReducer from 'containers/Character/static/staticReducer';
 
 const createRootReducer = (history) =>
     combineReducers({

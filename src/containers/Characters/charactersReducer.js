@@ -1,4 +1,4 @@
-import { SET_CHARS_DATA, SET_CHARACTER_DETAILS } from "./charactersConstants";
+import { SET_CHARS_DATA } from "./charactersConstants";
 
 const initialState = {
   currentCharacters: [],
@@ -7,7 +7,7 @@ const initialState = {
   prevCharacterRequest: null
 };
 
-function reducer(state = initialState, action) {
+function charactersReducer(state = initialState, action) {
   switch (action.type) {
     case SET_CHARS_DATA:
       return {
@@ -22,4 +22,4 @@ function reducer(state = initialState, action) {
   }
 }
 
-export default reducer;
+export default charactersReducer;

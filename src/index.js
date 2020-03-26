@@ -18,6 +18,7 @@ export const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
 const middleware = [sagaMiddleware, routerMiddleware(history)];
 
+//TODO:: add ability to see maps
 const store = createStore(
     createRootReducer(history),
     composeWithDevTools(applyMiddleware(...middleware))

@@ -19,6 +19,7 @@ const Characters = (props) => {
     };
     return (
         <div className="app">
+            {/* TODO:: make a hash for peoples */}
             <div>
                 Search
                 <input

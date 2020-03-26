@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
-import { getCharacterDetails } from 'containers/Character/characterConstants';
+import {
+    getCharacterDetails,
+    resetCurrentCharacter
+} from 'containers/Character/characterConstants';
 import {
     getCharacterData,
     getCurrentCharacterStaticData
@@ -9,7 +12,10 @@ import {
 
 export const useCharacterDetails = (id) => {
     const dispatch = useDispatch();
+    // Whenever the characterId is changed, reset curr character and
+    // get new character details
     useEffect(() => {
+        dispatch(resetCurrentCharacter());
         dispatch(getCharacterDetails(id));
     }, [id]);
     return {

@@ -1,8 +1,13 @@
 import { put, all, takeEvery, call, select } from 'redux-saga/effects';
-
 import { get } from 'services/restUtilsSaga';
 import { convertArrObjToMap } from 'services/general/generalHelpers';
-import { HANDLE_ASYNC_DATA } from 'containers/Character/characterConstants';
+import { validateURLRequest } from 'services/general/generalHelpers';
+import {
+    HANDLE_ASYNC_DATA,
+    HANDLE_API_RESPONSE,
+    setPrimitiveResponse,
+    setAsyncResponse
+} from 'services/Api/apiConstants';
 
 /**
  *
@@ -25,18 +30,12 @@ function* updateStoreOfNewStaticValues(
 }
 
 /**
- *
- * @param {Array} requestsArr - url array from server
+ * Returns a map of http data that exists in the store
+ * and non fullfiled promises array to excute
+ * @param {Array} requestsArr - http requests array
  * @param {Function} selector - store selector
- * @param {String} property - requied field to extract
- * @param {Function} mapChangeAction - store action on map change
  */
-function* handleAsyncArrParam(
-    requestsArr,
-    selector,
-    property,
-    mapChangeAction
-) {
+function* mapHttpRequests(requestsArr, selector) {
     const promises = [];
     const storeMap = yield select(selector);
     const requestsMap = new Map();
@@ -51,15 +50,34 @@ function* handleAsyncArrParam(
             promises.push(call(get, req));
         }
     });
-    const values = yield all(promises);
+    return { requestsMap, promises, storeMap };
+}
+
+/**
+ *
+ * @param {Array} requestsArr - url array from server
+ * @param {Function} selector - store selector
+ * @param {String} property - requied field to extract
+ * @param {Function} mapChangeAction - store action on map change
+ */
+function* handleAsyncArrParam(
+    requestsArr,
+    selector,
+    property,
+    mapChangeAction
+) {
+    // Mapping http array that exists in the store (which help in maps)
+    const mappedHttpArrayObj = yield mapHttpRequests(requestsArr, selector);
+    // Excecute fields that are not in the store
+    const values = yield all(mappedHttpArrayObj.promises);
     const deltaMap = yield updateStoreOfNewStaticValues(
         values,
         mapChangeAction,
         property,
-        storeMap
+        mappedHttpArrayObj.storeMap
     );
     // send back new map values and store's values
-    return new Map([...requestsMap].concat([...deltaMap]));
+    return new Map([...mappedHttpArrayObj.requestsMap].concat([...deltaMap]));
 }
 
 function* handleAsyncParam(httpRequest, key = '') {
@@ -80,7 +98,6 @@ function* handleAsyncDataHandler(action) {
     const {
         payload: { data, finishFetchingAction, actions, selectors, properties }
     } = action;
-
     for (let key in data) {
         processedDataObj[key] = yield handleAsyncArrParam(
             data[key],
@@ -92,6 +109,28 @@ function* handleAsyncDataHandler(action) {
     yield put(finishFetchingAction(processedDataObj));
 }
 
+function* handleApiResponse(action) {
+    const {
+        payload: { data, namespace }
+    } = action;
+    let primativeData = {};
+    let asyncData = {};
+    Object.keys(data).map((key) => {
+        let item = data[key];
+        if (Array.isArray(item) && validateURLRequest(item[0])) {
+            asyncData[key] = item;
+        } else {
+            primativeData[key] = item;
+        }
+        // else if (validateURLRequest(item)) {
+        // asyncData[key] =
+        // }
+    });
+    yield put(setPrimitiveResponse({ primativeData, namespace }));
+    yield put(setAsyncResponse({ asyncData, namespace }));
+}
+
 export function* watchAsyncApiData() {
     yield takeEvery(HANDLE_ASYNC_DATA, handleAsyncDataHandler);
+    yield takeEvery(HANDLE_API_RESPONSE, handleApiResponse);
 }
