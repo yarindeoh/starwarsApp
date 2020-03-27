@@ -5,3 +5,10 @@ body {
     background-size: 100%;
     color: $mainColor;
 }
+
+.loader-container {
+  position: absolute;
+  z-index: 9999999999;
+  top: 50%;
+  left: 50%;
+}

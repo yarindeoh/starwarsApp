@@ -1,5 +1,6 @@
 import React from "react";
 
+//TODO:: handle disabled buttons
 function Pagination({ nextPage, previousPage }) {
   return (
     <div className="pagination">

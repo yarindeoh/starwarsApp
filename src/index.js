@@ -12,6 +12,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import createRootReducer from 'services/rootReducer';
 import rootSaga from 'services/rootSagas';
 import { App } from './App';
+import Loader from 'components/Loader/LoaderView';
 
 export const history = createBrowserHistory();
 
@@ -30,6 +31,7 @@ ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
             <App />
+            <Loader />
         </ConnectedRouter>
     </Provider>,
     document.getElementById('root')

@@ -1,7 +1,10 @@
 import { useCallback, useEffect } from 'react';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 
-import { getAllCharacters } from 'containers/Characters/charactersConstants';
+import {
+    getAllCharacters,
+    getCharactersPage
+} from 'containers/Characters/charactersConstants';
 import {
     getCurrentCharacters,
     getNextCharactersRequest,
@@ -22,17 +25,17 @@ export const useGetPeople = () => {
     let prevPageUrl = useSelector(getPrevCharactersRequest, shallowEqual);
     return {
         getNext: useCallback(() => {
-            dispatch(getAllCharacters(nextPageUrl));
+            dispatch(getCharactersPage(nextPageUrl));
         }, [nextPageUrl]),
         getPrev: useCallback(() => {
-            dispatch(getAllCharacters(prevPageUrl));
+            dispatch(getCharactersPage(prevPageUrl));
         }, [prevPageUrl])
     };
 };
 
 export const useSearch = () => {
     const dispatch = useDispatch();
-    return useCallback((pageNumber) => {
-        dispatch(getAllCharacters(pageNumber));
+    return useCallback((querySearch) => {
+        dispatch(getAllCharacters(querySearch));
     }, []);
 };
