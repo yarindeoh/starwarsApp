@@ -21,7 +21,6 @@ Instead of using the original create-react-app, this is a boilerplate to build a
 - redux
 - redux-saga
 - sass
-- i18n (translation infra)
 - jest
 - babel
 - hot reload

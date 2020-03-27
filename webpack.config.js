@@ -4,6 +4,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const apiMocker = require('webpack-api-mocker');
 
+//TODO:: handle warning
 module.exports = (env, argv) => {
     return {
         performance: { hints: false },
@@ -17,8 +18,7 @@ module.exports = (env, argv) => {
                 src: path.resolve(__dirname, 'src'),
                 components: path.resolve(__dirname, 'src/components'),    
                 containers: path.resolve(__dirname, 'src/containers'),                            
-                services: path.resolve(__dirname, 'src/services'),
-                i18n: path.resolve(__dirname, 'src/services/i18n')
+                services: path.resolve(__dirname, 'src/services')
             }
         },
         output: {
