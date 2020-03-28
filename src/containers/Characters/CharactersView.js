@@ -6,7 +6,7 @@ import {
     useSearch
 } from 'containers/Characters/charactersHooks';
 import Pagination from 'components/Pagination';
-import CharacterRow from 'containers/Characters/components/CharacterRow';
+import CharacterRows from 'containers/Characters/components/CharacterRows';
 
 const Characters = (props) => {
     const data = useCharacterData();
@@ -27,7 +27,7 @@ const Characters = (props) => {
                     }}
                 />
             </div>
-            <CharacterRow data={data} changeLocation={changeLocation} />
+            <CharacterRows data={data} changeLocation={changeLocation} />
             <Pagination nextPage={getNext} previousPage={getPrev} />
         </div>
     );

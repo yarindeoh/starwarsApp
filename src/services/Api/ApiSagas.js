@@ -106,13 +106,16 @@ function* handleAsyncDataHandler(action) {
             actions[key]
         );
     }
+    console.log(processedDataObj);
     yield put(finishFetchingAction(processedDataObj));
 }
 
 function* handleApiResponse(action) {
+    // console.log(action);
     const {
         payload: { data, namespace }
     } = action;
+    // console.log(data);
     let primativeData = {};
     let asyncData = {};
     Object.keys(data).map((key) => {
