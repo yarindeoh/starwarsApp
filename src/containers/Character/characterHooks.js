@@ -2,9 +2,9 @@ import { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
 import {
-    getCharacterDetails,
     setCharacterDetails,
     handleAsyncCharacterDetails,
+    handleCurrentCharacterChange,
     resetCurrentCharacter
 } from 'containers/Character/characterConstants';
 import {
@@ -12,31 +12,25 @@ import {
     getCurrentCharacterStaticData
 } from 'containers/Character/characterSelectors';
 
-export const useCharacterDetails = (id) => {
-    const dispatch = useDispatch();
-    // Whenever the characterId is changed, reset curr character and
-    // get new character details
-    const characterData = useSelector(getCharacterData, shallowEqual);
-    useEffect(() => {
-        dispatch(getCharacterDetails(id));
-    }, [id]);
-    return {
-        characterData
-    };
-};
-
-export const getCurrentCharacterDetails = () => {
+// TODO:: fix
+export const useCharacterDetails = () => {
     return {
         characterData: useSelector(getCharacterData, shallowEqual)
     };
+};
+
+export const useGetCurrentCharacterDetails = (id) => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(handleCurrentCharacterChange(id));
+    }, [id]);
 };
 
 export const useSetCurrentCharacter = () => {
     const dispatch = useDispatch();
     return {
         setCurrentCharacter: useCallback((data) => {
-            //TODO:: add reset ?
-            dispatch(resetCurrentCharacter());
             dispatch(setCharacterDetails(data));
             dispatch(handleAsyncCharacterDetails(data));
         }, [])

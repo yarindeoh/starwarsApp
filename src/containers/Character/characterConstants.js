@@ -4,6 +4,7 @@ export const SET_PRIMITIVE_RESPONSE = `${NAMESPACE}/SET_PRIMITIVE_RESPONSE`;
 export const RESET_CURRENT_CHARACTER = `${NAMESPACE}/RESET_CURRENT_CHARACTER`;
 export const SET_CHARACTER_STATIC_DETAILS = `${NAMESPACE}/SET_CHARACTER_STATIC_DETAILS`;
 export const ASYNC_CHARACTER_DATA = `${NAMESPACE}/ASYNC_CHARACTER_DATA`;
+export const CURRENT_CHARACTER_CHANGED = `${NAMESPACE}/CURRENT_CHARACTER_CHANGED`;
 export const NAME_PROP = 'name';
 export const TITLE_PROP = 'title';
 
@@ -28,6 +29,11 @@ export const resetCurrentCharacter = () => ({
 
 export const handleAsyncCharacterDetails = (payload) => ({
     type: ASYNC_CHARACTER_DATA,
+    payload
+});
+
+export const handleCurrentCharacterChange = (payload) => ({
+    type: CURRENT_CHARACTER_CHANGED,
     payload
 });
 

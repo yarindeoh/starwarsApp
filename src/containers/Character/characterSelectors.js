@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 
+export const getCharacter = (state) => state.character;
 export const getCharacterData = (state) => state.character.data;
 export const getCharacterStaticData = (state) => state.character.staticData;
 export const getCurrCharacterFilms = (state) =>
