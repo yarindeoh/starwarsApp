@@ -5,14 +5,10 @@ import {
     setCharactersData
 } from 'containers/Characters/charactersConstants';
 import Api from 'containers/Characters/charactersApi';
-import { convertArrObjToMap } from 'services/general/generalHelpers';
 
 function* charactersDataHandler(action) {
     const { payload } = action;
     let data = yield call(Api.getSearchedCharacters, payload);
-    // console.log(data);
-    // let dataMap = convertArrObjToMap(data.results);
-    // console.log(dataMap);
     yield put(setCharactersData(data));
 }
 

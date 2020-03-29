@@ -14,6 +14,18 @@ export const getCurrCharacterFilmsArr = createSelector(
         return filmsMap && Array.from(filmsMap.values());
     }
 );
+export const getCurrCharacterHomeworld = (state) =>
+    state &&
+    state.character &&
+    state.character.staticData &&
+    state.character.staticData.homeworld;
+export const getCurrCharacterHomeworldArr = createSelector(
+    getCurrCharacterHomeworld,
+    (homeworldMap) => {
+        return homeworldMap && Array.from(homeworldMap.values());
+    }
+);
+
 export const getCurrCharacterSpecies = (state) =>
     state &&
     state.character &&
@@ -53,12 +65,14 @@ export const getCurrentCharacterStaticData = createSelector(
     getCurrCharacterSpeciesArr,
     getCurrCharacterStarshipsArr,
     getCurrCharacterVehiclesArr,
-    (films, species, starships, vehicles) => {
+    getCurrCharacterHomeworldArr,
+    (films, species, starships, vehicles, homeworld) => {
         return {
             films,
             species,
             starships,
-            vehicles
+            vehicles,
+            homeworld
         };
     }
 );

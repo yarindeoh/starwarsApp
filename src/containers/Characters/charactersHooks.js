@@ -13,6 +13,7 @@ import {
 
 export const useCharacterData = () => {
     const dispatch = useDispatch();
+    //TODO:: check before render
     useEffect(() => {
         dispatch(getAllCharacters(''));
     }, []);

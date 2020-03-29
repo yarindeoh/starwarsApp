@@ -2,7 +2,8 @@ import {
     SET_FILMS,
     SET_SPECIES,
     SET_STARSHIPS,
-    SET_VEHICLES
+    SET_VEHICLES,
+    SET_HOMEWORLD
 } from 'containers/Character/static/staticConstants';
 
 const initialStaticState = {
@@ -10,7 +11,8 @@ const initialStaticState = {
     films: new Map(),
     vehicles: new Map(),
     starships: new Map(),
-    species: new Map()
+    species: new Map(),
+    homeworld: new Map()
 };
 
 function staticReducer(state = initialStaticState, action) {
@@ -37,6 +39,12 @@ function staticReducer(state = initialStaticState, action) {
             return {
                 ...state,
                 vehicles: action.payload
+            };
+        }
+        case SET_HOMEWORLD: {
+            return {
+                ...state,
+                homeworld: action.payload
             };
         }
         default:

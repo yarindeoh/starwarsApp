@@ -42,5 +42,6 @@ export const staticProperties = {
     species: NAME_PROP,
     vehicles: NAME_PROP,
     starships: NAME_PROP,
-    films: TITLE_PROP
+    films: TITLE_PROP,
+    homeworld: NAME_PROP
 };

@@ -20,9 +20,6 @@ import { staticSelectors } from 'containers/Character/static/staticSelectors';
 
 function* characterDetailsHandler(action) {
     const data = yield call(Api.getCharacterDetails, action);
-    //TODO:: cache planets also!
-    // let planetMap = yield select((state) => state.static.planets);
-    // processedData.homeworld = yield handleAsyncParam(data.homeworld, 'name');
     yield handleCharacterApiData({ payload: data });
 }
 
@@ -31,9 +28,10 @@ function* handleCharacterApiData({ payload }) {
 }
 
 function* handleCharacterAsyncData({ payload }) {
+    let { url, ...newPayload } = payload;
     yield put(
         handleAsyncDataAction({
-            data: payload,
+            data: newPayload,
             finishFetchingAction: setCharacterStaticDetails,
             actions: staticActions,
             selectors: staticSelectors,

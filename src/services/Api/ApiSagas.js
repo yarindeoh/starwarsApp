@@ -80,11 +80,6 @@ function* handleAsyncArrParam(
     return new Map([...mappedHttpArrayObj.requestsMap].concat([...deltaMap]));
 }
 
-function* handleAsyncParam(httpRequest, key = '') {
-    let result = yield call(get, httpRequest);
-    return key ? result[key] : result;
-}
-
 /**
  *
  * @param {*} data
@@ -106,28 +101,27 @@ function* handleAsyncDataHandler(action) {
             actions[key]
         );
     }
-    console.log(processedDataObj);
     yield put(finishFetchingAction(processedDataObj));
 }
 
 function* handleApiResponse(action) {
-    // console.log(action);
     const {
         payload: { data, namespace }
     } = action;
-    // console.log(data);
     let primativeData = {};
     let asyncData = {};
+
     Object.keys(data).map((key) => {
         let item = data[key];
         if (Array.isArray(item) && validateURLRequest(item[0])) {
             asyncData[key] = item;
-        } else {
-            primativeData[key] = item;
+        } else if (typeof item === 'string') {
+            if (validateURLRequest(item)) {
+                asyncData[key] = [item];
+            } else {
+                primativeData[key] = item;
+            }
         }
-        // else if (validateURLRequest(item)) {
-        // asyncData[key] =
-        // }
     });
     yield put(setPrimitiveResponse({ primativeData, namespace }));
     yield put(setAsyncResponse({ asyncData, namespace }));
