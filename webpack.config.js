@@ -16,8 +16,8 @@ module.exports = (env, argv) => {
             alias: {
                 resources: path.resolve(__dirname, 'resources'),
                 src: path.resolve(__dirname, 'src'),
-                components: path.resolve(__dirname, 'src/components'),    
-                containers: path.resolve(__dirname, 'src/containers'),                            
+                components: path.resolve(__dirname, 'src/components'),
+                containers: path.resolve(__dirname, 'src/containers'),
                 services: path.resolve(__dirname, 'src/services')
             }
         },
@@ -28,10 +28,10 @@ module.exports = (env, argv) => {
         },
         module: {
             rules: [
-                { 
-                    test: /\.js$/, 
-                    exclude: /node_modules/, 
-                    loader: "babel-loader" 
+                {
+                    test: /\.js$/,
+                    exclude: /node_modules/,
+                    loader: 'babel-loader'
                 },
                 {
                     test: /\.(css|scss)$/,
@@ -58,15 +58,9 @@ module.exports = (env, argv) => {
             })
         ],
         devServer: {
-            before(app) {
-                apiMocker(app, path.resolve('./mockers/index.js'), {});
-            },
             port: 9000,
             hot: true,
-            historyApiFallback: true,
-            proxy: {
-                '/proxy/*': 'http://localhost:8080'
-            }
+            historyApiFallback: true
         }
     };
 };
