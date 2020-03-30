@@ -18,16 +18,16 @@ import Api from 'containers/Character/characterApi';
 import { staticActions } from 'containers/Character/static/staticConstants';
 import { staticSelectors } from 'containers/Character/static/staticSelectors';
 
-function* characterDetailsHandler(action) {
+export function* characterDetailsHandler(action) {
     const data = yield call(Api.getCharacterDetails, action);
     yield handleCharacterApiData({ payload: data });
 }
 
-function* handleCharacterApiData({ payload }) {
+export function* handleCharacterApiData({ payload }) {
     yield put(handleApiResponse({ data: payload, namespace: NAMESPACE }));
 }
 
-function* handleCharacterAsyncData({ payload }) {
+export function* handleCharacterAsyncData({ payload }) {
     let { url, ...newPayload } = payload;
     yield put(
         handleAsyncDataAction({

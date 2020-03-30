@@ -6,13 +6,13 @@ import {
 } from 'containers/Characters/charactersConstants';
 import Api from 'containers/Characters/charactersApi';
 
-function* charactersDataHandler(action) {
+export function* charactersDataHandler(action) {
     const { payload } = action;
     let data = yield call(Api.getSearchedCharacters, payload);
     yield put(setCharactersData(data));
 }
 
-function* charactersPagesHandler(action) {
+export function* charactersPagesHandler(action) {
     const { payload } = action;
     let data = yield call(Api.getAllCharacters, payload);
     yield put(setCharactersData(data));

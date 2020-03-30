@@ -2,7 +2,6 @@
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const apiMocker = require('webpack-api-mocker');
 
 //TODO:: handle warning
 module.exports = (env, argv) => {
