@@ -4,9 +4,9 @@ import { convertArrObjToMap } from 'services/general/generalHelpers';
 import { validateURLRequest } from 'services/general/generalHelpers';
 import {
     HANDLE_ASYNC_DATA,
-    HANDLE_API_RESPONSE,
+    PROCESS_SWAPI_API_DATA,
     setPrimitiveResponse,
-    setAsyncResponse
+    prepareAsyncDataConfig
 } from 'services/Api/apiConstants';
 
 /**
@@ -54,7 +54,7 @@ function* mapHttpRequests(requestsArr, selector) {
 }
 
 /**
- *
+ * Execute all async http requests and update their map values in the store
  * @param {Array} requestsArr - url array from server
  * @param {Function} selector - store selector
  * @param {String} property - requied field to extract
@@ -81,7 +81,8 @@ function* handleAsyncArrParam(
 }
 
 /**
- *
+ * Go over each async property (e.g vehicles, films ..), send for execution 
+ * and fire a finish action when all fulfilled
  * @param {*} data
  * @param {*} finishFetchingAction
  * @param {*} actions
@@ -104,7 +105,13 @@ function* handleAsyncDataHandler(action) {
     yield put(finishFetchingAction(processedDataObj));
 }
 
-function* handleApiResponse(action) {
+/**
+ * Sort received Json obj to primitive obj and async obj
+ * in order to handle them separately in different watchers in their containers
+ * @param {*} data
+ * @param {*} namespace
+ */
+function* processSwapiApiData(action) {
     const {
         payload: { data, namespace }
     } = action;
@@ -123,11 +130,12 @@ function* handleApiResponse(action) {
             }
         }
     });
+    // Set primitive in the store
     yield put(setPrimitiveResponse({ primativeData, namespace }));
-    yield put(setAsyncResponse({ asyncData, namespace }));
+    yield put(prepareAsyncDataConfig({ asyncData, namespace }));
 }
 
 export function* watchAsyncApiData() {
     yield takeEvery(HANDLE_ASYNC_DATA, handleAsyncDataHandler);
-    yield takeEvery(HANDLE_API_RESPONSE, handleApiResponse);
+    yield takeEvery(PROCESS_SWAPI_API_DATA, processSwapiApiData);
 }

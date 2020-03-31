@@ -18,7 +18,6 @@ export const useCharacterData = () => {
         dispatch(getAllCharacters(''));
     }, []);
     const chars = useSelector((state) => state.characters);
-    console.log(JSON.stringify(chars));
     return useSelector(getCurrentCharacters, shallowEqual);
 };
 

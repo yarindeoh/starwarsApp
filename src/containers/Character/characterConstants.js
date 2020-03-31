@@ -13,7 +13,7 @@ export const getCharacterDetails = (id) => ({
     id
 });
 
-export const setCharacterDetails = (payload) => ({
+export const setCharacterPrimitiveDetails = (payload) => ({
     type: SET_PRIMITIVE_RESPONSE,
     payload
 });
@@ -27,7 +27,7 @@ export const resetCurrentCharacter = () => ({
     type: RESET_CURRENT_CHARACTER
 });
 
-export const handleAsyncCharacterDetails = (payload) => ({
+export const asyncCharacterDetails = (payload) => ({
     type: ASYNC_CHARACTER_DATA,
     payload
 });

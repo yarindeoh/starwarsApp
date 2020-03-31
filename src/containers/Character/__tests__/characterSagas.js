@@ -12,7 +12,7 @@ import {
     CURRENT_CHARACTER_CHANGED,
     ASYNC_CHARACTER_DATA
 } from 'containers/Character/characterConstants';
-import { SET_ASYNC_RESPONSE } from 'services/Api/apiConstants';
+import { PREPARE_ASYNC_DATA_CONFIG } from 'services/Api/apiConstants';
 
 describe('Character Details Page', () => {
     it('Watch characters main sagas', () => {
@@ -28,7 +28,7 @@ describe('Character Details Page', () => {
         );
         expect(gen.next().value).toEqual(
             takeEvery(
-                `${NAMESPACE}/${SET_ASYNC_RESPONSE}`,
+                `${NAMESPACE}/${PREPARE_ASYNC_DATA_CONFIG}`,
                 handleCharacterAsyncData
             )
         );

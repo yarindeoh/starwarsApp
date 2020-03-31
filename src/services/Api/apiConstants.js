@@ -1,16 +1,16 @@
 export const SET_PRIMITIVE_RESPONSE = 'SET_PRIMITIVE_RESPONSE';
-export const SET_ASYNC_RESPONSE = 'SET_ASYNC_RESPONSE';
+export const PREPARE_ASYNC_DATA_CONFIG = 'PREPARE_ASYNC_DATA_CONFIG';
 export const NAMESPACE = 'Api';
 export const HANDLE_ASYNC_DATA = `${NAMESPACE}/HANDLE_ASYNC_DATA`;
-export const HANDLE_API_RESPONSE = `${NAMESPACE}/HANDLE_API_RESPONSE`;
+export const PROCESS_SWAPI_API_DATA = `${NAMESPACE}/PROCESS_SWAPI_API_DATA`;
 
 export const handleAsyncDataAction = (payload) => ({
     type: HANDLE_ASYNC_DATA,
     payload
 });
 
-export const handleApiResponse = (payload) => ({
-    type: HANDLE_API_RESPONSE,
+export const processSwapiApiData = (payload) => ({
+    type: PROCESS_SWAPI_API_DATA,
     payload
 });
 
@@ -19,7 +19,7 @@ export const setPrimitiveResponse = ({ namespace, primativeData }) => ({
     payload: primativeData
 });
 
-export const setAsyncResponse = ({ namespace, asyncData }) => ({
-    type: `${namespace}/${SET_ASYNC_RESPONSE}`,
+export const prepareAsyncDataConfig = ({ namespace, asyncData }) => ({
+    type: `${namespace}/${PREPARE_ASYNC_DATA_CONFIG}`,
     payload: asyncData
 });
