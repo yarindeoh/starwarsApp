@@ -19,7 +19,7 @@ import { staticActions } from 'containers/Character/static/staticConstants';
 import { staticSelectors } from 'containers/Character/static/staticSelectors';
 
 /**
- * Handle a case when refreshing current character 
+ * Handle a case when refreshing current character and store is empty
  * @param {String} id of requested character
  */
 export function* handleCurrentCharacterChanged(action) {
@@ -37,11 +37,11 @@ export function* handleCurrentCharacterChanged(action) {
  */
 export function* characterDetailsHandler(action) {
     const data = yield call(Api.getCharacterDetails, action);
-    yield handleCharacterApiData({ payload: data });
+    yield call(handleCharacterApiData, { payload: data });
 }
 
 /**
- * Fire process action for api saga to handle
+ * Pass Api data to api saga middlewar to handle
  * @param {Object} data containes async properties that need to be excuted
  * @param {String} namespace of the action that will be dispatched when fullfiled
  */
@@ -55,6 +55,7 @@ export function* handleCharacterApiData({ payload }) {
  * @param {Object} payload data json obj of async requests except for url key
  */
 export function* handlePrepareCharacterAsyncData({ payload }) {
+    console.log(payload);
     let { url, ...newPayload } = payload;
     yield put(
         handleAsyncDataAction({

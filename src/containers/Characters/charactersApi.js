@@ -1,5 +1,4 @@
-//TODO:: check absolute
-import Configuration from '../../services/configutation';
+import Configuration from 'services/configutation';
 import { get } from 'services/restUtilsSaga';
 
 function baseUrl(path) {

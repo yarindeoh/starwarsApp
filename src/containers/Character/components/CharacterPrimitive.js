@@ -3,7 +3,7 @@ import React from 'react';
 import { useCharacterDetails } from 'containers/Character/characterHooks';
 
 const CharacterPrimitive = React.memo(({ id }) => {
-    const { characterData } = useCharacterDetails(id);
+    const  characterData  = useCharacterDetails(id);
     return (
         <React.Fragment>
             {characterData &&

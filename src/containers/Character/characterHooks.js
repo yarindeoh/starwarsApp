@@ -11,11 +11,8 @@ import {
     getCurrentCharacterStaticData
 } from 'containers/Character/characterSelectors';
 
-// TODO:: fix
 export const useCharacterDetails = () => {
-    return {
-        characterData: useSelector(getCharacterData, shallowEqual)
-    };
+    return useSelector(getCharacterData, shallowEqual);
 };
 
 export const useGetCurrentCharacterDetails = (id) => {

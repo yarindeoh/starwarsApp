@@ -89,7 +89,7 @@ function* handleAsyncArrParam(
  * @param {*} selectors
  * @param {*} properties
  */
-function* handleAsyncDataHandler(action) {
+export function* handleAsyncDataHandler(action) {
     let processedDataObj = {};
     const {
         payload: { data, finishFetchingAction, actions, selectors, properties }
@@ -111,7 +111,7 @@ function* handleAsyncDataHandler(action) {
  * @param {*} data
  * @param {*} namespace
  */
-function* processSwapiApiData(action) {
+export function* processSwapiApiData(action) {
     const {
         payload: { data, namespace }
     } = action;
