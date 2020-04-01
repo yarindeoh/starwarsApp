@@ -3,18 +3,19 @@ import React from 'react';
 import { useCharacterDetails } from 'containers/Character/characterHooks';
 
 const CharacterPrimitive = React.memo(({ id }) => {
-    const  characterData  = useCharacterDetails(id);
+    const characterData = useCharacterDetails(id);
     return (
-        <React.Fragment>
+        <div className="primitive">
             {characterData &&
                 Object.keys(characterData).map((key, index) => {
                     return (
                         <div key={`${key}${index}`}>
-                            {key} : {characterData[key]}
+                            <span className="key">{key} </span>:
+                            {characterData[key]}
                         </div>
                     );
                 })}
-        </React.Fragment>
+        </div>
     );
 });
 

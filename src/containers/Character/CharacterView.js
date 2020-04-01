@@ -8,11 +8,13 @@ const CharacterView = React.memo((props) => {
     const characterId = props.match.params.characterId;
     useGetCurrentCharacterDetails(characterId);
     return (
-        <div className="characterDetails">
+        <React.Fragment>
             <h3>Character Details</h3>
-            <CharacterPrimitive id={characterId} />
-            <CharacterLists />
-        </div>
+            <div className="characterDetails">
+                <CharacterPrimitive id={characterId} />
+                <CharacterLists />
+            </div>
+        </React.Fragment>
     );
 });
 

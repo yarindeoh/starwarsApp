@@ -1,5 +1,3 @@
-
-
 .centered {
     display: flex;
     justify-content: space-around;
@@ -11,16 +9,9 @@
     margin: 10px;
 }
 
-.upperCaseText {
-    text-transform: uppercase;
-    letter-spacing: 4px;
-}
-
-.lightText {
-    color: $mainColor;
-}
-
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     text-align: center;
 }
 
@@ -37,7 +28,7 @@ h1, h2, h3 {
     -moz-animation: react-spinner_spin 1.2s linear infinite;
     animation: react-spinner_spin 1.2s linear infinite;
     border-radius: 5px;
-    background-color: white;
+    background-color: $mainColor;
     position: absolute;
     width: 20%;
     height: 7.8%;
@@ -46,22 +37,34 @@ h1, h2, h3 {
 }
 
 @keyframes react-spinner_spin {
-    0% { opacity: 1; }
-    100% { opacity: 0.15; }
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.15;
+    }
 }
 
 @-moz-keyframes react-spinner_spin {
-    0% { opacity: 1; }
-    100% { opacity: 0.15; }
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.15;
+    }
 }
 
 @-webkit-keyframes react-spinner_spin {
-    0% { opacity: 1; }
-    100% { opacity: 0.15; }
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.15;
+    }
 }
 
-[title="previous page"],
-[title="last page"],
-[title="first page"] {
+[title='previous page'],
+[title='last page'],
+[title='first page'] {
     visibility: hidden;
 }

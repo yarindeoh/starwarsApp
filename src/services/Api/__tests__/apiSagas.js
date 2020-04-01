@@ -10,7 +10,8 @@ import {
 import {
     watchAsyncApiData,
     handleAsyncDataHandler,
-    processSwapiApiData
+    processSwapiApiData,
+    handleAsyncArrParam
 } from 'services/Api/apiSagas';
 import { staticActions } from 'containers/Character/static/staticConstants';
 import { staticSelectors } from 'containers/Character/static/staticSelectors';
@@ -64,16 +65,48 @@ describe('Api sagas', () => {
         expect(gen.next().done).toEqual(true);
     });
     it('Map http requests and handle async data', () => {
+        const asyncData = {
+            starships: [
+                'https://swapi.co/api/starships/12/',
+                'https://swapi.co/api/starships/22/'
+            ],
+            homeworld: 'https://swapi.co/api/planets/1/',
+            films: [
+                'https://swapi.co/api/films/2/',
+                'https://swapi.co/api/films/6/',
+                'https://swapi.co/api/films/3/',
+                'https://swapi.co/api/films/1/',
+                'https://swapi.co/api/films/7/'
+            ],
+            species: ['https://swapi.co/api/species/1/'],
+            vehicles: [
+                'https://swapi.co/api/vehicles/14/',
+                'https://swapi.co/api/vehicles/30/'
+            ]
+        };
         const action = {
             payload: {
-                data: data,
+                data: asyncData,
                 finishFetchingAction: setCharacterStaticDetails,
                 actions: staticActions,
                 selectors: staticSelectors,
                 properties: staticProperties
             }
         };
-        const gen = handleAsyncDataHandler();
-        // expect(gen.next().value).toEqual()
+        const gen = handleAsyncDataHandler(action);
+        const processedDataObj = {};
+        // console.log(gen.next().value);
+        // expect(gen.next().value).toEqual(call(handleAsyncArrParam, {}));
+        // expect(gen.next().value).toEqual(
+        //     call(handleAsyncArrParam, )
+        // expect(gen.next(action).value).toEqual(
+        //     call(handleAsyncArrParam)
+        // );
+        // {
+        //         requestsArr: action.payload.data.starships,
+        //         selector: action.payload.selectors.starships,
+        //         property: action.payload.properties.starships,
+        //         mapChangeAction: action.payload.actions.starships
+        //     }
     });
 });

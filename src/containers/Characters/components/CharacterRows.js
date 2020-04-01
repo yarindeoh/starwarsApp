@@ -4,11 +4,12 @@ import { useSetCurrentCharacter } from 'containers/Character/characterHooks';
 const CharacterRow = React.memo(({ data, changeLocation }) => {
     const { setCurrentCharacter } = useSetCurrentCharacter();
     return (
-        <React.Fragment>
+        <div className="characters-list">
             {data &&
                 data.map((character, index) => {
                     return (
                         <div
+                            className="character-row"
                             key={`${character.name}${index}`}
                             item-value={character.url}
                             onClick={(event) => {
@@ -24,7 +25,7 @@ const CharacterRow = React.memo(({ data, changeLocation }) => {
                         </div>
                     );
                 })}
-        </React.Fragment>
+        </div>
     );
 });
 

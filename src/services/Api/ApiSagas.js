@@ -39,7 +39,6 @@ function* mapHttpRequests(requestsArr, selector) {
     const promises = [];
     const storeMap = yield select(selector);
     const requestsMap = new Map();
-    //TODO:: handle one param of url
     requestsArr.map((req) => {
         //check if map has reqArr's value - if so, push value to res map
         // else push it to promises arr
@@ -60,12 +59,12 @@ function* mapHttpRequests(requestsArr, selector) {
  * @param {String} property - requied field to extract
  * @param {Function} mapChangeAction - store action on map change
  */
-function* handleAsyncArrParam(
+function* handleAsyncArrParam({
     requestsArr,
     selector,
     property,
     mapChangeAction
-) {
+}) {
     // Mapping http array that exists in the store (which help in maps)
     const mappedHttpArrayObj = yield mapHttpRequests(requestsArr, selector);
     // Excecute fields that are not in the store
@@ -81,7 +80,7 @@ function* handleAsyncArrParam(
 }
 
 /**
- * Go over each async property (e.g vehicles, films ..), send for execution 
+ * Go over each async property (e.g vehicles, films ..), send for execution
  * and fire a finish action when all fulfilled
  * @param {*} data
  * @param {*} finishFetchingAction
@@ -95,12 +94,12 @@ export function* handleAsyncDataHandler(action) {
         payload: { data, finishFetchingAction, actions, selectors, properties }
     } = action;
     for (let key in data) {
-        processedDataObj[key] = yield handleAsyncArrParam(
-            data[key],
-            selectors[key],
-            properties[key],
-            actions[key]
-        );
+        processedDataObj[key] = yield call(handleAsyncArrParam, {
+            requestsArr: data[key],
+            selector: selectors[key],
+            property: properties[key],
+            mapChangeAction: actions[key]
+        });
     }
     yield put(finishFetchingAction(processedDataObj));
 }

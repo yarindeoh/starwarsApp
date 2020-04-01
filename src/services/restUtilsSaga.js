@@ -30,7 +30,7 @@ export function* handleRequest(url, type, options = {}, data = {}) {
         yield put(stopLoadingAction());
         return serverData;
     } catch (e) {
-        // TODO:: handle errors
+        // TODO:: handle errors with global modals
         yield put(stopLoadingAction());
         return yield Promise.reject(e);
     }

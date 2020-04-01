@@ -5,12 +5,12 @@ import { useCharacterComplexDetails } from 'containers/Character/characterHooks'
 const CharacterLists = () => {
     const { characterStaticData } = useCharacterComplexDetails();
     return (
-        <React.Fragment>
+        <div className="list">
             {characterStaticData &&
                 Object.keys(characterStaticData).map((key, index) => {
                     return (
                         <div key={`${key}${index}`}>
-                            {key} :
+                            <span className="key"> {key} </span>:
                             <ol>
                                 {characterStaticData[key] &&
                                     characterStaticData[
@@ -24,7 +24,7 @@ const CharacterLists = () => {
                         </div>
                     );
                 })}
-        </React.Fragment>
+        </div>
     );
 };
 

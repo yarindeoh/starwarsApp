@@ -1,5 +1,5 @@
 body {
-    font-family: "DINNextW01-Light";
+    font-family: 'DINNextW01-Light';
     margin: 15px;
     background-image: url(#{$backgroundUrl}});
     background-size: 100%;
@@ -7,8 +7,8 @@ body {
 }
 
 .loader-container {
-  position: absolute;
-  z-index: 9999999999;
-  top: 50%;
-  left: 50%;
+    position: absolute;
+    z-index: 9999999999;
+    top: 50%;
+    left: 50%;
 }

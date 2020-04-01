@@ -1,0 +1,14 @@
+.characterDetails {
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px;
+    .primitive {
+        & > div {
+            padding: 7px;
+        }
+    }
+    .key {
+        color: $secondaryColor;
+    }
+}

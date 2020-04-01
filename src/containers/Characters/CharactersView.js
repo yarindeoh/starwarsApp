@@ -7,6 +7,7 @@ import {
 } from 'containers/Characters/charactersHooks';
 import Pagination from 'components/Pagination';
 import CharacterRows from 'containers/Characters/components/CharacterRows';
+import character from 'resources/images/character.png';
 
 const Characters = (props) => {
     const data = useCharacterData();
@@ -17,18 +18,26 @@ const Characters = (props) => {
         props.history.push(`/characterDetails${characterIdPrefix}`);
     };
     return (
-        <div className="app">
+        <div className="characters-container">
             {/* TODO:: make a hash for peoples */}
-            <div>
-                Search
-                <input
-                    onChange={(event) => {
-                        getSearch(event.target.value);
-                    }}
-                />
+            <div className="characters-layout">
+                <div>
+                    <div className="search">
+                        <input
+                            placeholder="search"
+                            onChange={(event) => {
+                                getSearch(event.target.value);
+                            }}
+                        />
+                    </div>
+                    <CharacterRows
+                        data={data}
+                        changeLocation={changeLocation}
+                    />
+                    <Pagination nextPage={getNext} previousPage={getPrev} />
+                </div>
+                <img src={character} />
             </div>
-            <CharacterRows data={data} changeLocation={changeLocation} />
-            <Pagination nextPage={getNext} previousPage={getPrev} />
         </div>
     );
 };
