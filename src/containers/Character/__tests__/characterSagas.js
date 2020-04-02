@@ -94,7 +94,7 @@ describe('Character Details Page', () => {
     });
     it('Current character changed', () => {
         const action = {
-            payload: undefined
+            payload: data
         };
         const emptyCHaracterStore = {};
         const characterData = data;

@@ -13,7 +13,7 @@ import {
 
 export const useCharacterData = () => {
     const dispatch = useDispatch();
-    //TODO:: check before render
+    //TODO:: check if there are characters in the store before render
     useEffect(() => {
         dispatch(getAllCharacters(''));
     }, []);
@@ -31,7 +31,9 @@ export const useGetPeople = () => {
         }, [nextPageUrl]),
         getPrev: useCallback(() => {
             dispatch(getCharactersPage(prevPageUrl));
-        }, [prevPageUrl])
+        }, [prevPageUrl]),
+        nextUrl: nextPageUrl,
+        prevUrl: prevPageUrl
     };
 };
 

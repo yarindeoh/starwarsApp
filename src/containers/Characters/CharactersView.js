@@ -11,7 +11,7 @@ import character from 'resources/images/character.png';
 
 const Characters = (props) => {
     const data = useCharacterData();
-    const { getPrev, getNext } = useGetPeople();
+    const { getPrev, getNext, nextUrl, prevUrl } = useGetPeople();
     const getSearch = useSearch();
     const changeLocation = (characterRequest) => {
         let characterIdPrefix = characterRequest.split('/people')[1];
@@ -19,7 +19,6 @@ const Characters = (props) => {
     };
     return (
         <div className="characters-container">
-            {/* TODO:: make a hash for peoples */}
             <div className="characters-layout">
                 <div>
                     <div className="search">
@@ -34,7 +33,12 @@ const Characters = (props) => {
                         data={data}
                         changeLocation={changeLocation}
                     />
-                    <Pagination nextPage={getNext} previousPage={getPrev} />
+                    <Pagination
+                        nextPage={getNext}
+                        previousPage={getPrev}
+                        nextUrl={nextUrl}
+                        prevUrl={prevUrl}
+                    />
                 </div>
                 <img src={character} />
             </div>

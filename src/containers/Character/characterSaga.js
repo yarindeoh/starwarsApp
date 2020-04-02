@@ -55,7 +55,6 @@ export function* handleCharacterApiData({ payload }) {
  * @param {Object} payload data json obj of async requests except for url key
  */
 export function* handlePrepareCharacterAsyncData({ payload }) {
-    console.log(payload);
     let { url, ...newPayload } = payload;
     yield put(
         handleAsyncDataAction({

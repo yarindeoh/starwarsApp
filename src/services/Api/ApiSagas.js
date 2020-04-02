@@ -59,7 +59,7 @@ function* mapHttpRequests(requestsArr, selector) {
  * @param {String} property - requied field to extract
  * @param {Function} mapChangeAction - store action on map change
  */
-function* handleAsyncArrParam({
+export function* handleAsyncArrParam({
     requestsArr,
     selector,
     property,

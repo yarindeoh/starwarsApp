@@ -1,13 +1,12 @@
 import React from 'react';
 
-//TODO:: handle disabled buttons
-function Pagination({ nextPage, previousPage }) {
+function Pagination({ nextPage, previousPage, nextUrl, prevUrl }) {
     return (
         <div className="pagination">
-            <button onClick={() => previousPage()} disabled={false}>
+            <button onClick={() => previousPage()} disabled={!prevUrl}>
                 {'<'}
             </button>{' '}
-            <button onClick={() => nextPage()} disabled={false}>
+            <button onClick={() => nextPage()} disabled={!nextUrl}>
                 {'>'}
             </button>{' '}
         </div>

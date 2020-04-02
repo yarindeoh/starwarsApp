@@ -3,7 +3,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-//TODO:: handle warning
 module.exports = (env, argv) => {
     return {
         performance: { hints: false },
