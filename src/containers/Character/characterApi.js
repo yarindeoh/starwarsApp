@@ -8,7 +8,10 @@ function baseUrl(path) {
 
 const Api = {
     getCharacterDetails: ({ id }) => {
-        return get(baseUrl(`people/${id}`));
+        return get(baseUrl(`people/${id}/`));
+    },
+    getTestMock: () => {
+        return get(baseUrl()`proxy/x/`)
     }
 };
 

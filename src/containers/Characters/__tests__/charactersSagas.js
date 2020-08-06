@@ -26,26 +26,26 @@ describe('Characters List', () => {
                     eye_color: 'blue',
                     birth_year: '19BBY',
                     gender: 'male',
-                    homeworld: 'https://swapi.co/api/planets/1/',
+                    homeworld: 'https://swapi.dev/api/planets/1/',
                     films: [
-                        'https://swapi.co/api/films/2/',
-                        'https://swapi.co/api/films/6/',
-                        'https://swapi.co/api/films/3/',
-                        'https://swapi.co/api/films/1/',
-                        'https://swapi.co/api/films/7/'
+                        'https://swapi.dev/api/films/2/',
+                        'https://swapi.dev/api/films/6/',
+                        'https://swapi.dev/api/films/3/',
+                        'https://swapi.dev/api/films/1/',
+                        'https://swapi.dev/api/films/7/'
                     ],
-                    species: ['https://swapi.co/api/species/1/'],
+                    species: ['https://swapi.dev/api/species/1/'],
                     vehicles: [
-                        'https://swapi.co/api/vehicles/14/',
-                        'https://swapi.co/api/vehicles/30/'
+                        'https://swapi.dev/api/vehicles/14/',
+                        'https://swapi.dev/api/vehicles/30/'
                     ],
                     starships: [
-                        'https://swapi.co/api/starships/12/',
-                        'https://swapi.co/api/starships/22/'
+                        'https://swapi.dev/api/starships/12/',
+                        'https://swapi.dev/api/starships/22/'
                     ],
                     created: '2014-12-09T13:50:51.644000Z',
                     edited: '2014-12-20T21:17:56.891000Z',
-                    url: 'https://swapi.co/api/people/1/'
+                    url: 'https://swapi.dev/api/people/1/'
                 },
 
                 {
@@ -57,26 +57,26 @@ describe('Characters List', () => {
                     eye_color: 'red',
                     birth_year: '33BBY',
                     gender: 'n/a',
-                    homeworld: 'https://swapi.co/api/planets/8/',
+                    homeworld: 'https://swapi.dev/api/planets/8/',
                     films: [
-                        'https://swapi.co/api/films/2/',
-                        'https://swapi.co/api/films/5/',
-                        'https://swapi.co/api/films/4/',
-                        'https://swapi.co/api/films/6/',
-                        'https://swapi.co/api/films/3/',
-                        'https://swapi.co/api/films/1/',
-                        'https://swapi.co/api/films/7/'
+                        'https://swapi.dev/api/films/2/',
+                        'https://swapi.dev/api/films/5/',
+                        'https://swapi.dev/api/films/4/',
+                        'https://swapi.dev/api/films/6/',
+                        'https://swapi.dev/api/films/3/',
+                        'https://swapi.dev/api/films/1/',
+                        'https://swapi.dev/api/films/7/'
                     ],
-                    species: ['https://swapi.co/api/species/2/'],
+                    species: ['https://swapi.dev/api/species/2/'],
                     vehicles: [],
                     starships: [],
                     created: '2014-12-10T15:11:50.376000Z',
                     edited: '2014-12-20T21:17:50.311000Z',
-                    url: 'https://swapi.co/api/people/3/'
+                    url: 'https://swapi.dev/api/people/3/'
                 }
             ],
             characterCount: 87,
-            nextCharacterRequest: 'https://swapi.co/api/people/?page=2&search=',
+            nextCharacterRequest: 'https://swapi.dev/api/people/?page=2&search=',
             prevCharacterRequest: null
         };
     });
@@ -106,7 +106,7 @@ describe('Characters List', () => {
     it('charactersPagesHandler', () => {
         const action = {
             payload: {
-                url: 'https://swapi.co/api/people/?page=2&search='
+                url: 'https://swapi.dev/api/people/?page=2&search='
             }
         };
         const gen = charactersPagesHandler(action);

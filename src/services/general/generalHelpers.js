@@ -7,7 +7,7 @@ export const convertArrObjToMap = (arr, property) => {
 
 export const validateURLRequest = (str) => {
     let pattern = new RegExp(
-        /https?:\/\/(.+?\.)?swapi\.co\/api(\/[A-Za-z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;\=]*)?/
+        /https?:\/\/(.+?\.)?swapi\.dev\/api(\/[A-Za-z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;\=]*)?/
     );
     return !!pattern.test(str);
 };

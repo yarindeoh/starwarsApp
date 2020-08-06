@@ -23,7 +23,7 @@ function* updateStoreOfNewStaticValues(
 ) {
     // contains all new map values that are not in the store
     const deltaMap = convertArrObjToMap(values, property);
-    const mergedMap = new Map([...deltaMap].concat([...storeMap]));
+    const mergedMap = new Map([...q1    ].concat([...storeMap]));
     // Update static map in the store
     yield put(mapChangeAction(mergedMap));
     return deltaMap;
@@ -38,16 +38,18 @@ function* updateStoreOfNewStaticValues(
 function* mapHttpRequests(requestsArr, selector) {
     const promises = [];
     const storeMap = yield select(selector);
-    const requestsMap = new Map();
+        const requestsMap = new Map();
     requestsArr.map((req) => {
         //check if map has reqArr's value - if so, push value to res map
         // else push it to promises arr
+        req = req.replace('http','https');
         if (storeMap.has(req)) {
             var reqValue = storeMap.get(req);
             requestsMap.set(req, reqValue);
         } else {
             promises.push(call(get, req));
         }
+        console.log(req);
     });
     return { requestsMap, promises, storeMap };
 }

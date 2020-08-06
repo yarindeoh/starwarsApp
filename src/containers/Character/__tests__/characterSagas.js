@@ -32,19 +32,19 @@ describe('Character Details Page', () => {
             eye_color: 'yellow',
             birth_year: '41.9BBY',
             gender: 'male',
-            homeworld: 'https://swapi.co/api/planets/1/',
+            homeworld: 'https://swapi.dev/api/planets/1/',
             films: [
-                'https://swapi.co/api/films/2/',
-                'https://swapi.co/api/films/6/',
-                'https://swapi.co/api/films/3/',
-                'https://swapi.co/api/films/1/'
+                'https://swapi.dev/api/films/2/',
+                'https://swapi.dev/api/films/6/',
+                'https://swapi.dev/api/films/3/',
+                'https://swapi.dev/api/films/1/'
             ],
-            species: ['https://swapi.co/api/species/1/'],
+            species: ['https://swapi.dev/api/species/1/'],
             vehicles: [],
-            starships: ['https://swapi.co/api/starships/13/'],
+            starships: ['https://swapi.dev/api/starships/13/'],
             created: '2014-12-10T15:18:20.704000Z',
             edited: '2014-12-20T21:17:50.313000Z',
-            url: 'https://swapi.co/api/people/4/'
+            url: 'https://swapi.dev/api/people/4/'
         };
     });
     it('Watch characters main sagas', () => {

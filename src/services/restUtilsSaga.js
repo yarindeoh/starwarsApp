@@ -17,6 +17,7 @@ export function* handleRequest(url, type, options = {}, data = {}) {
     const config = {
         ...options,
         method: type,
+        // cors: 'no-cors',
         headers: HEADERS
     };
     if (type === 'POST') {

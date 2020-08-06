@@ -1,6 +1,6 @@
 // In real world this api prefix needs to be relative
 const configData = {
-    defaultApiPrefix: 'https://swapi.co/api'
+    defaultApiPrefix: 'https://swapi.dev/api'
 };
 
 class Configuration {

@@ -8,10 +8,10 @@ function baseUrl(path) {
 
 const Api = {
     getAllCharacters: (url) => {
-        return get(url);
+        return get(`${url}`);
     },
     getSearchedCharacters: (querySearch) => {
-        return get(baseUrl(`people?search=${querySearch}`));
+        return get(baseUrl(`people/?search=${querySearch}`));
     }
 };
 
